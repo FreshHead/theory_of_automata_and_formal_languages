@@ -20,7 +20,7 @@ from enum import Enum
 
 
 class TokenName(Enum):
-    NUMBER = ('0', '1')
+    DIGIT = ('0', '1')
     LETTER = ('a', 'b', 'c', 'd', '1')
     SPACE = ' '
     UNKNOWN = 'UNKNOWN'

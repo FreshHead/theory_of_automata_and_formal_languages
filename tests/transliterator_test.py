@@ -1,7 +1,7 @@
 from src.transliterator import TokenName, transliterate_symbol
 
 assert transliterate_symbol('a').name == TokenName.LETTER
-assert transliterate_symbol('1').name == TokenName.NUMBER
+assert transliterate_symbol('1').name == TokenName.DIGIT
 assert transliterate_symbol(' ').name == TokenName.SPACE
 assert transliterate_symbol('@').name == TokenName.UNKNOWN
 print(''.isspace())
