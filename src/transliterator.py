@@ -39,4 +39,3 @@ def transliterate_symbol(symbol):
         if symbol in name.value:
             return Token(name, symbol)
     return Token(TokenName.UNKNOWN, symbol)
-
