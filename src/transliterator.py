@@ -7,7 +7,6 @@
     Вариант 14
     первый тип слов: (010)*000(001)*
     второй тип слов: (a|b|c|d)+
-    Первые два символа всегда ca
 ========================================================================================================================
 Алфавит: {0, 1, a, b, c, d, 'символ " "'}
 ========================================================================================================================
@@ -17,15 +16,14 @@ From wiki:
     The token name is a category of lexical unit.
 ========================================================================================================================
 """
-from enum import Enum, unique
+from enum import Enum
 
 
-@unique
 class TokenName(Enum):
     NUMBER = ('0', '1')
-    LETTER = ('a', 'b', 'c', 'd')
+    LETTER = ('a', 'b', 'c', 'd', '1')
     SPACE = ' '
-    UNKNOWN = ''
+    UNKNOWN = 'UNKNOWN'
 
 
 class Token:
@@ -35,6 +33,7 @@ class Token:
 
 
 def transliterate_symbol(symbol):
+    assert len(symbol) == 1, "Length of symbol must be 1!"
     for name in TokenName:
         if symbol in name.value:
             return Token(name, symbol)
