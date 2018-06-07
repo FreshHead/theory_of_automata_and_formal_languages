@@ -17,13 +17,15 @@ From wiki:
     The token name is a category of lexical unit.
 ========================================================================================================================
 """
-from enum import Enum
+from enum import Enum, unique
 
 
+@unique
 class TokenName(Enum):
     NUMBER = ('0', '1')
-    LETTER = ('a', 'b', 'c','d')
+    LETTER = ('a', 'b', 'c', 'd')
     SPACE = ' '
+    UNKNOWN = ''
 
 
 class Token:
@@ -36,3 +38,5 @@ def transliterate_symbol(symbol):
     for name in TokenName:
         if symbol in name.value:
             return Token(name, symbol)
+    return Token(TokenName.UNKNOWN, symbol)
+
