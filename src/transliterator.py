@@ -27,9 +27,17 @@ class TokenName(Enum):
 
 
 class Token:
+    special = {"\n": "'\\n'", "\t": "'\\t'"}
+
     def __init__(self, name, value):
         self.name = name
         self.value = value
+
+    def to_string(self):
+        prepared_value = self.value
+        if self.value in self.special:
+            prepared_value = self.special[self.value]
+        return "'" + prepared_value + "' is " + str(self.name)
 
 
 def transliterate_symbol(symbol):
