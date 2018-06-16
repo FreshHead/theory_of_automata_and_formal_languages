@@ -9,14 +9,18 @@
     Комментарии и пробелы должны пропускаться.
 Вариант 14:
     первый тип слов: (010)*000(001)*
-    второй тип слов: (a|b|c|d)+
-    Первые два символа всегда ca
+    второй тип слов: (a|b|c|d)+ (Первые два символа второго типа всегда ca)
 ========================================================================================================================
 Пробел используется для разделения типов слов, в остальных случаях он опускается.
 ========================================================================================================================
 """
+from src.transliterator import transliterate_symbol
+from src.tokens import first_token
 
 
 def analyze(string):
-    assert string[:2] == "ca", "First two symbols must be 'ca'!"
-    pass
+    transliterated = []
+    for symbol in string:
+        transliterated.append(transliterate_symbol(symbol))
+    return first_token.start(transliterated, 0)
+
