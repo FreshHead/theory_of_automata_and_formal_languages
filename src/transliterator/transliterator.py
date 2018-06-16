@@ -12,7 +12,9 @@
 ========================================================================================================================
 """
 from enum import Enum
+
 _special = {"\n": "'\\n'", "\t": "'\\t'"}
+
 
 class SymbolName(Enum):
     DIGIT = ('0', '1')
@@ -22,7 +24,6 @@ class SymbolName(Enum):
 
 
 class Symbol:
-
     def __init__(self, name, value):
         self.name = name
         self.value = value
@@ -40,3 +41,10 @@ def transliterate_symbol(symbol):
         if symbol in name.value:
             return Symbol(name, symbol)
     return Symbol(SymbolName.UNKNOWN, symbol)
+
+
+def transliterate_word(word):
+    result = []
+    for symbol in word:
+        result.append(transliterate_symbol(symbol))
+    return result

@@ -1,4 +1,4 @@
-from src.transliterator import transliterate_symbol
+from src.transliterator.transliterator import transliterate_symbol
 import time
 
 
