@@ -10,24 +10,18 @@
 ========================================================================================================================
 Алфавит: {0, 1, a, b, c, d, 'символ " "'}
 ========================================================================================================================
-From wiki:
-    A lexical token or simply token is a string with an assigned and thus identified meaning.
-    It is structured as a pair consisting of a token name and an optional token value.
-    The token name is a category of lexical unit.
-========================================================================================================================
 """
 from enum import Enum
+_special = {"\n": "'\\n'", "\t": "'\\t'"}
 
-
-class TokenName(Enum):
+class SymbolName(Enum):
     DIGIT = ('0', '1')
     LETTER = ('a', 'b', 'c', 'd', '1')
     SPACE = ' '
     UNKNOWN = 'UNKNOWN'
 
 
-class Token:
-    special = {"\n": "'\\n'", "\t": "'\\t'"}
+class Symbol:
 
     def __init__(self, name, value):
         self.name = name
@@ -35,14 +29,14 @@ class Token:
 
     def to_string(self):
         prepared_value = self.value
-        if self.value in self.special:
-            prepared_value = self.special[self.value]
+        if self.value in _special:
+            prepared_value = _special[self.value]
         return "'" + prepared_value + "' is " + str(self.name)
 
 
 def transliterate_symbol(symbol):
     assert len(symbol) == 1, "Length of symbol must be 1!"
-    for name in TokenName:
+    for name in SymbolName:
         if symbol in name.value:
-            return Token(name, symbol)
-    return Token(TokenName.UNKNOWN, symbol)
+            return Symbol(name, symbol)
+    return Symbol(SymbolName.UNKNOWN, symbol)
