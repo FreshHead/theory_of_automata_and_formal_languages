@@ -1,4 +1,4 @@
-from src.transliterator import transliterate_symbol
+from src.transliterator.transliterator import transliterate_symbol
 from enum import Enum
 
 
@@ -9,9 +9,8 @@ from enum import Enum
 
 
 class Token:
-    def __init__(self, value):
-        self.value = value
-        self.transliterated_value = []
-        for symbol in value:
-            self.transliterated_value.append(transliterate_symbol(symbol))
-        pass
+    def __init__(self, word):
+        self.word = word
+        self.transliterated = []
+        for symbol in word:
+            self.transliterated.append(transliterate_symbol(symbol))

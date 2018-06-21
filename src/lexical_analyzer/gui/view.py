@@ -4,24 +4,24 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from src.lexical_analyzer.gui.controller import on_start_clicked
 
-window = Gtk.Window(title='Транслитератор')
+window = Gtk.Window(title='Лексический анализатор')
 window.set_resizable(False)
 window.connect('delete-event', Gtk.main_quit)
 
-source_label = Gtk.Label("Текст:")
+source_label = Gtk.Label('Текст:')
 
 source_text_view = Gtk.TextView()
 source_text_view.set_size_request(500, 200)
 
-message_label = Gtk.Label("Сообщения:")
+message_label = Gtk.Label('Сообщения:')
 
 message_text_view = Gtk.TextView()
 message_text_view.set_size_request(500, 200)
 
-start_button = Gtk.Button("Запуск!")
+start_button = Gtk.Button('Запуск!')
 source_buffer = source_text_view.get_buffer()
 message_buffer = message_text_view.get_buffer()
-start_button.connect("clicked", on_start_clicked, source_buffer, message_buffer)
+start_button.connect('clicked', on_start_clicked, source_buffer, message_buffer)
 
 # placement
 h_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
