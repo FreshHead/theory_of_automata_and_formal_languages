@@ -1,8 +1,9 @@
 from src.lexical_analyzer.tokens.token import Token
+from src.lexical_analyzer.tokens.token import TokenName
 
 
 class FirstToken(Token):
-    type = 'FIRST'
+    type = TokenName.FIRST
     error = None
 
     def __init__(self, word):

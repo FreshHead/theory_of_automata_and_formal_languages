@@ -7,7 +7,7 @@ def on_start_clicked(self, input_buffer, output_buffer):
     output_buffer.insert_at_cursor('Analyze started:\n')
     tokens = analyze(input_string)
     for token in tokens:
-        token_message = 'Token: ' + token.word + ' of type: ' + token.type
+        token_message = 'Token: ' + token.word + ' of type: ' + token.type.name
         if token.error:
             token_message += ' has error: ' + token.error + ' \nAnalyze was stopped!'
             spaced_string = ' ' + input_string + ' '
