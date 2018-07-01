@@ -14,7 +14,7 @@ class SyntaxAnalyzer:
         self.current_index = -1
         pass
 
-    def syntax_analyze(self):
+    def analyze(self):
         return self.S()
 
     def S(self):
