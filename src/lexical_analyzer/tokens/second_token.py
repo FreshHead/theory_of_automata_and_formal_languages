@@ -3,8 +3,7 @@ from src.lexical_analyzer.tokens.token import TokenName
 
 
 class SecondToken(Token):
-    type = TokenName.UNKNOWN
-    error = None
+    type = TokenName.SECOND
 
     def __init__(self, word):
         super().__init__(word)

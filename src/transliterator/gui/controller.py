@@ -1,4 +1,5 @@
 from src.transliterator.transliterator import transliterate_symbol
+from src.gui.view import main
 
 
 def on_start(source_text, messages_var):
@@ -8,3 +9,6 @@ def on_start(source_text, messages_var):
         token = transliterate_symbol(symbol)
         messages.append(token.to_string())
     messages_var.set(messages)
+
+
+main('Транслитератор', on_start)

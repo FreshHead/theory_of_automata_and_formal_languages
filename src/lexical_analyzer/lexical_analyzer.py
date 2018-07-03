@@ -42,6 +42,6 @@ def analyze(string):
             pass
         tokens.append(token)
 
-        if token.error:
-            return tokens
+        # if token.error:
+        #     return tokens
     return tokens
