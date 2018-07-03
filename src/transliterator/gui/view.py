@@ -1,45 +1,49 @@
-import gi
+from tkinter import *
+from tkinter import ttk
+from functools import partial
 
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
-from src.transliterator.gui.controller import on_start_clicked
+from src.transliterator.gui.controller import on_start
 
-window = Gtk.Window(title='Транслитератор')
-window.set_resizable(False)
-window.connect('delete-event', Gtk.main_quit)
+root = Tk()
+root.title("Транслитератор")
 
-source_label = Gtk.Label("Текст:")
+mainframe = ttk.Frame(root, padding="3 3 12 12")
+mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+mainframe.columnconfigure(0, weight=1)
+mainframe.rowconfigure(0, weight=1)
 
-source_text_view = Gtk.TextView()
-source_text_view.set_size_request(500, 200)
+# Source
+source_text = Text(mainframe, width=40, height=10)
+source_text.grid(column=1, row=2, sticky=(W, E))
 
-message_label = Gtk.Label("Сообщения:")
+# Source scrollbar
+source_scrollbar = ttk.Scrollbar(mainframe, orient=VERTICAL, command=source_text.yview)
+source_scrollbar.grid(column=2, row=2, sticky=(N, S))
+source_text.configure(yscrollcommand=source_scrollbar.set)
 
-message_text_view = Gtk.TextView()
-message_text_view.set_size_request(500, 200)
+# Message
+messages_var = StringVar()
 
-start_button = Gtk.Button("Запуск!")
-source_buffer = source_text_view.get_buffer()
-message_buffer = message_text_view.get_buffer()
-start_button.connect("clicked", on_start_clicked, source_buffer, message_buffer)
+message_listbox = Listbox(mainframe, width=40, height=10, listvariable=messages_var)
+message_listbox.grid(column=1, row=4, sticky=(W, E))
 
-# placement
-h_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-h_box.add(source_text_view)
-h_box.add(start_button)
+# Message scrollbar
+message_scrollbar = ttk.Scrollbar(mainframe, orient=VERTICAL, command=message_listbox.yview)
+message_scrollbar.grid(column=2, row=4, sticky=(N, S))
+message_listbox.configure(yscrollcommand=message_scrollbar.set)
 
-source_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-source_box.add(source_label)
-source_box.add(h_box)
+# Labels
+ttk.Label(mainframe, text="Текст:").grid(column=1, row=1, sticky=W)
+ttk.Label(mainframe, text="Сообщение:").grid(column=1, row=3, sticky=W)
 
-message_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-message_box.add(message_label)
-message_box.add(message_text_view)
+func_with_args = partial(on_start, source_text, messages_var)
 
-layout = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-window.add(layout)
-layout.pack_start(source_box, False, False, 0)
-layout.pack_start(message_box, False, False, 0)
+ttk.Button(mainframe, text="Запуск", command=func_with_args).grid(column=1, row=5, sticky=E)
 
-window.show_all()
-Gtk.main()
+# Padding
+for child in mainframe.winfo_children():
+    child.grid_configure(padx=5, pady=5)
+
+source_text.focus()
+
+root.mainloop()
