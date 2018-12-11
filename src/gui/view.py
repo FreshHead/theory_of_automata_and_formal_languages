@@ -22,9 +22,7 @@ def main(title, launch_func):
     source_text.configure(yscrollcommand=source_scrollbar.set)
 
     # Message
-    messages_var = StringVar()
-
-    message_listbox = Listbox(mainframe, width=100, height=10, listvariable=messages_var)
+    message_listbox = Listbox(mainframe, width=100, height=10)
     message_listbox.grid(column=1, row=4, sticky=(W, E))
 
     # Message scrollbar
@@ -36,7 +34,7 @@ def main(title, launch_func):
     ttk.Label(mainframe, text="Текст:").grid(column=1, row=1, sticky=W)
     ttk.Label(mainframe, text="Сообщение:").grid(column=1, row=3, sticky=W)
 
-    func_with_args = partial(launch_func, source_text, messages_var)
+    func_with_args = partial(launch_func, source_text, message_listbox)
 
     ttk.Button(mainframe, text="Запуск", command=func_with_args).grid(column=1, row=5, sticky=E)
 

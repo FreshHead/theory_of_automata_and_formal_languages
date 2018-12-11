@@ -2,7 +2,7 @@ import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from src.lexical_analyzer.gui.controller import on_start_clicked
+from src.syntactic_analyzer.gui.controller import on_start_clicked
 
 window = Gtk.Window(title='Синтаксический анализатор')
 window.set_resizable(False)
