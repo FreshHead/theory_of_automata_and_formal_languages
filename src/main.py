@@ -2,12 +2,15 @@ import gi
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
-Gtk.rc_parse('Elegant_Brit/gtk-2.0/gtkrc')
+# Gtk.rc_parse('Elegant_Brit/gtk-2.0/gtkrc')
 from src.page import Page
 from src.transliterator.gui.controller import on_start_clicked as on_transliterate_clicked
 from src.lexical_analyzer.gui.controller import on_start_clicked as on_lex_analyzer_clicked
 from src.syntax_analyzer.gui.controller import on_start_clicked as on_syn_analyzer_clicked
 
+settings = Gtk.Settings.get_default()
+settings.set_property("gtk-theme-name", "Raleigh")
+# settings.set_property("gtk-application-prefer-dark-theme", True)  # if you want use dark theme, set second arg to True
 
 window = Gtk.Window(title='Теория формальных граматик и автоматов', resizable=False)
 window.connect('delete-event', Gtk.main_quit)
