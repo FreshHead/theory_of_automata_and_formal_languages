@@ -1,0 +1,23 @@
+import gi
+gi.require_version('Gtk', '3.0')
+
+from gi.repository import Gtk
+Gtk.rc_parse('Elegant_Brit/gtk-2.0/gtkrc')
+from src.page import Page
+from src.transliterator.gui.controller import on_start_clicked as on_transliterate_clicked
+from src.lexical_analyzer.gui.controller import on_start_clicked as on_lex_analyzer_clicked
+from src.syntax_analyzer.gui.controller import on_start_clicked as on_syn_analyzer_clicked
+
+
+window = Gtk.Window(title='Теория формальных граматик и автоматов', resizable=False)
+window.connect('delete-event', Gtk.main_quit)
+
+notebook = Gtk.Notebook()
+notebook.append_page(Page(on_transliterate_clicked), Gtk.Label("Транслитератор"))
+notebook.append_page(Page(on_lex_analyzer_clicked), Gtk.Label("Лехический анализатор"))
+notebook.append_page(Page(on_syn_analyzer_clicked), Gtk.Label("Синтаксический анализатор"))
+
+window.add(notebook)
+
+window.show_all()
+Gtk.main()
