@@ -18,7 +18,7 @@ _special = {"\n": "'\\n'", "\t": "'\\t'"}
 
 class SymbolName(Enum):
     DIGIT = ('0', '1')
-    LETTER = ('a', 'b', 'c', 'd', '1')
+    LETTER = ('a', 'b', 'c', 'd')
     SPACE = ' '
     UNKNOWN = 'UNKNOWN'
 
@@ -41,7 +41,6 @@ def transliterate_symbol(symbol):
         if symbol in name.value:
             return Symbol(name, symbol)
     return Symbol(SymbolName.UNKNOWN, symbol)
-
 
 def transliterate_word(word):
     result = []

@@ -41,7 +41,4 @@ def analyze(string):
             token = UnknownToken(word)
             pass
         tokens.append(token)
-
-        # if token.error:
-        #     return tokens
     return tokens

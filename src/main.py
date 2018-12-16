@@ -21,6 +21,5 @@ notebook.append_page(Page(on_lex_analyzer_clicked), Gtk.Label("Лехическ�
 notebook.append_page(Page(on_syn_analyzer_clicked), Gtk.Label("Синтаксический анализатор"))
 
 window.add(notebook)
-
 window.show_all()
 Gtk.main()

@@ -1,5 +1,4 @@
-import gi, cairo
-
+import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -7,7 +6,6 @@ from gi.repository import Gtk
 class Page(Gtk.VBox):
     def __init__(self, on_start_clicked):
         super().__init__()
-        print(self.get_style())
 
         source_label = Gtk.Label('Текст:')
 

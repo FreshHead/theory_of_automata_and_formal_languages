@@ -2,4 +2,5 @@
 Labs for course "Теория формальных граматик и автоматов".
 You may find in this repository transliterator, lexical analyzer, syntactical analyzer all written in Python.
 
-# TODO: Все ошибки должны передаваться с помощью Exception.
+# TODO: Выводить синтаксическое дерево на экран
+# TODO: Отчищать сообщения после каждого нажатия на кнопку запуск
