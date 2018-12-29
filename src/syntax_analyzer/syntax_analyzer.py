@@ -8,6 +8,26 @@ from src.lexical_analyzer.lexical_analyzer import analyze
 from src.lexical_analyzer.tokens.token import TokenName
 
 
+class Node:
+    def __init__(self, name, left=None, middle=None, right=None):
+        self.name = name
+        self.left = left
+        self.middle = middle
+        self.right = right
+
+    def to_string(self):  # добавь иммутабельность
+        result = self.name
+        if self.left:
+            result += "=>(" + self.left.to_string()
+        else:
+            return result
+        if self.middle:
+            result += ", " + self.middle.to_string()
+        if self.right:
+            result += ", " + self.right.to_string()
+        return result + ")"
+
+
 class SyntaxAnalyzer:
     def __init__(self, string):
         self.tokens = analyze(string)
@@ -15,8 +35,8 @@ class SyntaxAnalyzer:
 
     def analyze(self):
         try:
-            self.S()
-            return "Sentence is correct!"
+            root = self.S()
+            return root.to_string()
         except Exception as e:
             return e.args[0]
 
@@ -24,10 +44,11 @@ class SyntaxAnalyzer:
         self.current_index = self.current_index + 1
         if len(self.tokens) <= self.current_index:
             raise Exception("Syntax error: Unexpected end of sentence!")
-        if self.tokens[self.current_index].type == TokenName.FIRST:
-            return self.A() + self.S()
-        elif self.tokens[self.current_index].type == TokenName.SECOND:
-            return
+        terminal = self.tokens[self.current_index].type
+        if terminal == TokenName.FIRST:
+            return Node("S", Node(terminal.name), self.A(), self.S())
+        elif terminal == TokenName.SECOND:
+            return Node("S", Node(terminal.name))
         else:
             raise Exception("Syntax error: Unknown token!")
 
@@ -35,9 +56,10 @@ class SyntaxAnalyzer:
         self.current_index = self.current_index + 1
         if len(self.tokens) <= self.current_index:
             raise Exception("Syntax error: Unexpected end of sentence!")
-        if self.tokens[self.current_index].type == TokenName.FIRST:
-            return
-        elif self.tokens[self.current_index].type == TokenName.SECOND:
-            return self.S() + self.A()
+        terminal = self.tokens[self.current_index].type
+        if terminal == TokenName.FIRST:
+            return Node("A", Node(terminal.name))
+        elif terminal == TokenName.SECOND:
+            return Node("A", Node(terminal.name), self.S(), self.A())
         else:
             raise Exception("Syntax error: Unknown token!")

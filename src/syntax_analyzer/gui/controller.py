@@ -1,5 +1,5 @@
 import time
-import gi
+import gi, cairo
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from src.syntax_analyzer.syntax_analyzer import SyntaxAnalyzer
