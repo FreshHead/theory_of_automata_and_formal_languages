@@ -3,9 +3,9 @@ from enum import Enum
 
 
 class TokenName(Enum):
-    FIRST = 1
-    SECOND = 2
-    UNKNOWN = 3
+    FIRST = "1"
+    SECOND = "2"
+    UNKNOWN = "3"
 
 
 class Token:

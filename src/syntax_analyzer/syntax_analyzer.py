@@ -34,11 +34,8 @@ class SyntaxAnalyzer:
         self.current_index = -1
 
     def analyze(self):
-        try:
-            root = self.S()
-            return root.to_string()
-        except Exception as e:
-            return e.args[0]
+        root = self.S()
+        return root
 
     def S(self):
         self.current_index = self.current_index + 1
@@ -46,9 +43,9 @@ class SyntaxAnalyzer:
             raise Exception("Syntax error: Unexpected end of sentence!")
         terminal = self.tokens[self.current_index].type
         if terminal == TokenName.FIRST:
-            return Node("S", Node(terminal.name), self.A(), self.S())
+            return Node("S", Node(terminal.value), self.A(), self.S())
         elif terminal == TokenName.SECOND:
-            return Node("S", Node(terminal.name))
+            return Node("S", Node(terminal.value))
         else:
             raise Exception("Syntax error: Unknown token!")
 
@@ -58,8 +55,8 @@ class SyntaxAnalyzer:
             raise Exception("Syntax error: Unexpected end of sentence!")
         terminal = self.tokens[self.current_index].type
         if terminal == TokenName.FIRST:
-            return Node("A", Node(terminal.name))
+            return Node("A", Node(terminal.value))
         elif terminal == TokenName.SECOND:
-            return Node("A", Node(terminal.name), self.S(), self.A())
+            return Node("A", Node(terminal.value), self.S(), self.A())
         else:
             raise Exception("Syntax error: Unknown token!")
