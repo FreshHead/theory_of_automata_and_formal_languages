@@ -25,11 +25,11 @@ def on_start_clicked(self, input_buffer, output_buffer):
 
 
 def on_draw(wid, cr, root_node):
-    draw_node(root_node, cr, 50, 50, 1)
+    cr.set_line_width(0.5)
+    draw_node_name(root_node, cr, 50, 50, 1)
 
 
-def draw_node(node, cr, x, y, level):
-    cr.line_to(x, y)
+def draw_node_name(node, cr, x, y, level):
     cr.move_to(x, y)
     cr.show_text(node.name)
     print(node.name, x, y)
@@ -37,10 +37,22 @@ def draw_node(node, cr, x, y, level):
     height_space = 20
     if node.left:
         if node.middle:
-            draw_node(node.left, cr, x - width_space / level, y + height_space, level + 2)
+            draw_node_name(node.left, cr, x - width_space / level, y + height_space - 1, level + 2)
+            cr.move_to(x, y)
+            cr.line_to(x - width_space / level, y + height_space - 7)
+            cr.stroke()
         else:
-            draw_node(node.left, cr, x, y + height_space, level + 2)
+            draw_node_name(node.left, cr, x, y + height_space, level + 2)
+            cr.move_to(x, y)
+            cr.line_to(x, y + height_space - 7)
+            cr.stroke()
     if node.middle:
-        draw_node(node.middle, cr, x, y + height_space, level + 2)
+        draw_node_name(node.middle, cr, x, y + height_space, level + 2)
+        cr.move_to(x, y)
+        cr.line_to(x, y + height_space - 7)
+        cr.stroke()
     if node.right:
-        draw_node(node.right, cr, x + width_space / level, y + height_space, level + 2)
+        draw_node_name(node.right, cr, x + width_space / level, y + height_space, level + 2)
+        cr.move_to(x, y)
+        cr.line_to(x + width_space / level, y + height_space - 7)
+        cr.stroke()

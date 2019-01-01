@@ -15,7 +15,7 @@ class Node:
         self.middle = middle
         self.right = right
 
-    def to_string(self):  # добавь иммутабельность
+    def to_string(self):
         result = self.name
         if self.left:
             result += "=>(" + self.left.to_string()
@@ -35,12 +35,15 @@ class SyntaxAnalyzer:
 
     def analyze(self):
         root = self.S()
+        if len(self.tokens) > self.current_index + 1:
+            raise Exception("Can't analyze after " + str(self.current_index + 1) + " word. Maybe this must be the last?")
         return root
 
     def S(self):
         self.current_index = self.current_index + 1
         if len(self.tokens) <= self.current_index:
-            raise Exception("Syntax error: Unexpected end of sentence!")
+            raise Exception(
+                "Syntax error: Unexpected end of sentence! Cannot get " + str(self.current_index + 1) + " word for S")
         terminal = self.tokens[self.current_index].type
         if terminal == TokenName.FIRST:
             return Node("S", Node(terminal.value), self.A(), self.S())
@@ -52,7 +55,8 @@ class SyntaxAnalyzer:
     def A(self):
         self.current_index = self.current_index + 1
         if len(self.tokens) <= self.current_index:
-            raise Exception("Syntax error: Unexpected end of sentence!")
+            raise Exception(
+                "Syntax error: Unexpected end of sentence! Cannot get " + str(self.current_index + 1) + " word for A")
         terminal = self.tokens[self.current_index].type
         if terminal == TokenName.FIRST:
             return Node("A", Node(terminal.value))
