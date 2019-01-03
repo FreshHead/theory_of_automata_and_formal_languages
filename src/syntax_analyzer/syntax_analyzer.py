@@ -4,7 +4,7 @@
    A--> <1>
    A-->  <2> S A
 """
-from src.lexical_analyzer.lexical_analyzer import analyze
+from src.lexical_analyzer.lexical_analyzer import analyze as lex_analyze
 from src.lexical_analyzer.tokens.token import TokenName
 
 
@@ -28,15 +28,27 @@ class Node:
         return result + ")"
 
 
+def check_for_duplicates(string):
+    duplicates_list = set()
+    words = string.split(" ")
+    for i in words:
+        if words.count(i) >= 2:
+            duplicates_list.add(i)
+    if duplicates_list:
+        raise Exception("Found duplicates: " + str(duplicates_list) + "!")
+
+
 class SyntaxAnalyzer:
     def __init__(self, string):
-        self.tokens = analyze(string)
+        check_for_duplicates(string)
+        self.tokens = lex_analyze(string)
         self.current_index = -1
 
     def analyze(self):
         root = self.S()
         if len(self.tokens) > self.current_index + 1:
-            raise Exception("Can't analyze after " + str(self.current_index + 1) + " word. Maybe this must be the last?")
+            raise Exception(
+                "Can't analyze after " + str(self.current_index + 1) + " word. Maybe this must be the last?")
         return root
 
     def S(self):
