@@ -3,7 +3,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
-from time import gmtime, strftime
+from datetime import datetime
 
 
 def create_table(name, list_store):
@@ -19,6 +19,7 @@ def create_table(name, list_store):
     v_box.add(tree_view)
     return v_box
 
+
 def insert_to_buffer(buffer, message):
-    timestamp = strftime("%H:%M:%S", gmtime())
+    timestamp = datetime.now().strftime("%H:%M:%S.%f")
     buffer.insert(buffer.get_end_iter(), '[%s] %s\n' % (timestamp, message))

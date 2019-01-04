@@ -21,11 +21,11 @@ message_window = Gtk.ScrolledWindow()
 message_window.set_size_request(500, 200)
 message_window.add(message_text_view)
 
-output_label = Gtk.Label("Структурированный вывод:")
-output_text_view = Gtk.TextView(editable=False)
-output_window = Gtk.ScrolledWindow()
-output_window.set_size_request(500, 200)
-output_window.add(output_text_view)
+result_label = Gtk.Label("Структурированный вывод:")
+result_text_view = Gtk.TextView(editable=False)
+result_window = Gtk.ScrolledWindow()
+result_window.set_size_request(500, 200)
+result_window.add(result_text_view)
 
 digit_list_store = Gtk.ListStore(str, str)
 digit_box = create_table("Таблица чисел:", digit_list_store)
@@ -42,7 +42,7 @@ tree_table = Gtk.TreeView()
 start_button = Gtk.Button('Запуск!')
 
 start_button.connect('clicked', on_start_clicked, source_text_view.get_buffer(), message_text_view.get_buffer(),
-                     output_text_view.get_buffer())
+                     result_text_view.get_buffer())
 
 # placement
 v_box_left = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -50,8 +50,8 @@ v_box_left.add(source_label)
 v_box_left.add(source_window)
 v_box_left.add(message_label)
 v_box_left.add(message_window)
-v_box_left.add(output_label)
-v_box_left.add(output_window)
+v_box_left.add(result_label)
+v_box_left.add(result_window)
 
 v_box_right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 table_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)

@@ -5,7 +5,7 @@ from gi.repository import Gtk
 from src.page import Page
 from transliterator.gui.controller import on_start_clicked as on_transliterate_clicked
 from lexical_analyzer.gui.controller import on_start_clicked as on_lex_analyzer_clicked
-from src.syntax_analyzer.gui.controller import on_start_clicked as on_syn_analyzer_clicked
+from syntax_analyzer.gui.controller import on_start_clicked as on_syn_analyzer_clicked
 
 settings = Gtk.Settings.get_default()
 settings.set_property("gtk-theme-name", "Raleigh")

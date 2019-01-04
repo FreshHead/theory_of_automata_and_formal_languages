@@ -1,12 +1,9 @@
-from lexical_analyzer.tokens.token import Token, TokenName
+from lexical_analyzer.tokens.token import Token, TokenType
 
 
 class FirstToken(Token):
-    type = TokenName.FIRST
-    error = None
-
     def __init__(self, word):
-        super().__init__(word)
+        super().__init__(word, TokenType.FIRST)
         if len(word) % 3 != 0:
             self.error = "Длина слова должна быть кратна трём!"
             return

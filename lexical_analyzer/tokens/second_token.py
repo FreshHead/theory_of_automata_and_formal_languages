@@ -1,11 +1,9 @@
-from lexical_analyzer.tokens.token import Token, TokenName
+from lexical_analyzer.tokens.token import Token, TokenType
 
 
 class SecondToken(Token):
-    type = TokenName.SECOND
-
     def __init__(self, word):
-        super().__init__(word)
+        super().__init__(word, TokenType.SECOND)
         self.error = self.__A(self.transliterated, 0)
 
     def __A(self, transliterated, current_index):
