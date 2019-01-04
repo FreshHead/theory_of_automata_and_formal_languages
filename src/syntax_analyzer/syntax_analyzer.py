@@ -4,8 +4,8 @@
    A--> <1>
    A-->  <2> S A
 """
-from src.lexical_analyzer.lexical_analyzer import analyze as lex_analyze
-from src.lexical_analyzer.tokens.token import TokenName
+from lexical_analyzer.lexical_analyzer import analyze as lex_analyze
+from lexical_analyzer.tokens.token import TokenName
 
 
 class Node:

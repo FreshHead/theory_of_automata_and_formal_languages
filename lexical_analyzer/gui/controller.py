@@ -1,6 +1,6 @@
 import time
 
-from src.lexical_analyzer.lexical_analyzer import analyze
+from lexical_analyzer.lexical_analyzer import analyze
 
 
 def on_start_clicked(self, input_buffer, output_buffer):

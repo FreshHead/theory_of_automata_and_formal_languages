@@ -1,4 +1,4 @@
-from src.transliterator.transliterator import SymbolName, transliterate_symbol
+from transliterator.transliterator import SymbolName, transliterate_symbol
 
 assert transliterate_symbol('a').name == SymbolName.LETTER
 assert transliterate_symbol('1').name == SymbolName.DIGIT

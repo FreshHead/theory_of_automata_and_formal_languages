@@ -1,4 +1,4 @@
-from src.lexical_analyzer.lexical_analyzer import analyze
+from lexical_analyzer.lexical_analyzer import analyze
 
 """
 первый тип слов: (010)*000(001)*

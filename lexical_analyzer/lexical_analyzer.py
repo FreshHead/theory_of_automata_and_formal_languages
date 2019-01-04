@@ -14,10 +14,10 @@
 Пробел используется для разделения типов слов, в остальных случаях он опускается.
 ========================================================================================================================
 """
-from src.lexical_analyzer.tokens.first_token import FirstToken
-from src.lexical_analyzer.tokens.second_token import SecondToken
-from src.lexical_analyzer.tokens.unknown_token import UnknownToken
-from src.transliterator.transliterator import transliterate_symbol, SymbolName
+from lexical_analyzer.tokens.first_token import FirstToken
+from lexical_analyzer.tokens.second_token import SecondToken
+from lexical_analyzer.tokens.unknown_token import UnknownToken
+from transliterator.transliterator import transliterate_symbol, SymbolName
 
 
 def to_list(string):

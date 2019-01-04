@@ -4,21 +4,28 @@ gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
 from all_in_one.gui_functions import create_table
+from all_in_one.controller import on_start_clicked
 
 window = Gtk.Window(title='Теория формальных граматик и автоматов', resizable=False)
 window.connect('delete-event', Gtk.main_quit)
 
 source_label = Gtk.Label('Исходный текст:')
 source_text_view = Gtk.TextView()
-source_text_view.set_size_request(500, 100)
+source_window = Gtk.ScrolledWindow()
+source_window.set_size_request(500, 100)
+source_window.add(source_text_view)
 
 message_label = Gtk.Label('Сообщения:')
 message_text_view = Gtk.TextView(editable=False)
-message_text_view.set_size_request(500, 200)
+message_window = Gtk.ScrolledWindow()
+message_window.set_size_request(500, 200)
+message_window.add(message_text_view)
 
 output_label = Gtk.Label("Структурированный вывод:")
 output_text_view = Gtk.TextView(editable=False)
-output_text_view.set_size_request(500, 200)
+output_window = Gtk.ScrolledWindow()
+output_window.set_size_request(500, 200)
+output_window.add(output_text_view)
 
 digit_list_store = Gtk.ListStore(str, str)
 digit_box = create_table("Таблица чисел:", digit_list_store)
@@ -34,14 +41,17 @@ tree_table = Gtk.TreeView()
 
 start_button = Gtk.Button('Запуск!')
 
+start_button.connect('clicked', on_start_clicked, source_text_view.get_buffer(), message_text_view.get_buffer(),
+                     output_text_view.get_buffer())
+
 # placement
 v_box_left = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 v_box_left.add(source_label)
-v_box_left.add(source_text_view)
+v_box_left.add(source_window)
 v_box_left.add(message_label)
-v_box_left.add(message_text_view)
+v_box_left.add(message_window)
 v_box_left.add(output_label)
-v_box_left.add(output_text_view)
+v_box_left.add(output_window)
 
 v_box_right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 table_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)

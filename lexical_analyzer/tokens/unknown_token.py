@@ -1,5 +1,4 @@
-from src.lexical_analyzer.tokens.token import Token
-from src.lexical_analyzer.tokens.token import TokenName
+from lexical_analyzer.tokens.token import Token, TokenName
 
 
 class UnknownToken(Token):

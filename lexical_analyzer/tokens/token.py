@@ -1,4 +1,4 @@
-from src.transliterator.transliterator import transliterate_symbol
+from transliterator.transliterator import transliterate_symbol
 from enum import Enum
 
 

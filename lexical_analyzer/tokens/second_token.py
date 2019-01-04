@@ -1,5 +1,4 @@
-from src.lexical_analyzer.tokens.token import Token
-from src.lexical_analyzer.tokens.token import TokenName
+from lexical_analyzer.tokens.token import Token, TokenName
 
 
 class SecondToken(Token):
@@ -22,7 +21,6 @@ class SecondToken(Token):
         if current.value == 'a':
             return self.__CFin(transliterated, next_index)
         return 'Wrong ' + str(next_index) + ' symbol!' + ' Perhaps you mean a ?'
-
 
     def __CFin(self, transliterated, current_index):
         if len(transliterated) == current_index:

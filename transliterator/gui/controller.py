@@ -1,4 +1,4 @@
-from src.transliterator.transliterator import transliterate_symbol
+from transliterator.transliterator import transliterate_symbol
 
 
 def on_start_clicked(self, input_buffer, output_buffer):
