@@ -2,7 +2,6 @@ import gi
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
-# Gtk.rc_parse('Elegant_Brit/gtk-2.0/gtkrc')
 from src.page import Page
 from src.transliterator.gui.controller import on_start_clicked as on_transliterate_clicked
 from src.lexical_analyzer.gui.controller import on_start_clicked as on_lex_analyzer_clicked
