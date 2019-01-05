@@ -3,6 +3,7 @@ from lexical_analyzer.lexical_analyzer import analyze as lex_analyze
 from all_in_one.custom_exceptions import AnalyzeException, LexicalAnalyzeException
 from all_in_one.gui_functions import insert_to_buffer
 from syntax_analyzer.syntax_analyzer import SyntaxAnalyzer
+from lexical_analyzer.lexical_analyzer import to_list, analyze_word
 
 
 def on_start_clicked(self, source_buffer, message_buffer, result_buffer):
@@ -27,19 +28,21 @@ def transliterate(input_buffer, output_buffer):
 def lexical_analyze(input_buffer, output_buffer):
     insert_to_buffer(output_buffer, 'Lexical analyze started:')
     input_string = input_buffer.get_text(input_buffer.get_start_iter(), input_buffer.get_end_iter(), False)
-    tokens = lex_analyze(input_string)
-    for token in tokens:
-        if token.error:
-            spaced_string = ' ' + input_string + ' '
-            selection_start = spaced_string.find(' ' + token.word + ' ')
-            selection_end = selection_start
-            while spaced_string[selection_end + 1] != ' ':
-                selection_end += 1
-            start_iter = input_buffer.get_iter_at_offset(selection_start)
-            end_iter = input_buffer.get_iter_at_offset(selection_end)
-            input_buffer.select_range(start_iter, end_iter)
-            raise LexicalAnalyzeException(token.to_string())
-        insert_to_buffer(output_buffer, token.to_string())
+    try:
+        for word in to_list(input_string):
+            token = analyze_word(word)
+            insert_to_buffer(output_buffer, token.to_string())
+    except LexicalAnalyzeException as e:
+        spaced_string = ' ' + input_string + ' '
+        selection_start = spaced_string.find(' ' + e.token.word + ' ')
+        selection_end = selection_start
+        while spaced_string[selection_end + 1] != ' ':
+            selection_end += 1
+        start_iter = input_buffer.get_iter_at_offset(selection_start)
+        end_iter = input_buffer.get_iter_at_offset(selection_end)
+        input_buffer.select_range(start_iter, end_iter)
+        raise e
+
     insert_to_buffer(output_buffer, 'Lexical analyze finished.')
 
 

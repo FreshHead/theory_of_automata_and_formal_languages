@@ -17,6 +17,7 @@
 from lexical_analyzer.tokens.first_token import FirstToken
 from lexical_analyzer.tokens.second_token import SecondToken
 from lexical_analyzer.tokens.unknown_token import UnknownToken
+from all_in_one.custom_exceptions import LexicalAnalyzeException
 from transliterator.transliterator import transliterate_symbol, SymbolType
 
 
@@ -29,16 +30,18 @@ def to_list(string):
     return words
 
 
+def analyze_word(word):
+    t_symbol = transliterate_symbol(word[0])
+    if t_symbol.symbol_type == SymbolType.DIGIT:
+        return FirstToken(word)
+    elif t_symbol.symbol_type == SymbolType.LETTER:
+        return SecondToken(word)
+    else:
+        raise LexicalAnalyzeException("Unknown token!", UnknownToken(word))
+
+
 def analyze(string):
     tokens = []
     for word in to_list(string):
-        t_symbol = transliterate_symbol(word[0])
-        if t_symbol.symbol_type == SymbolType.DIGIT:
-            token = FirstToken(word)
-        elif t_symbol.symbol_type == SymbolType.LETTER:
-            token = SecondToken(word)
-        else:
-            token = UnknownToken(word)
-            pass
-        tokens.append(token)
+        tokens.append(analyze_word(word))
     return tokens

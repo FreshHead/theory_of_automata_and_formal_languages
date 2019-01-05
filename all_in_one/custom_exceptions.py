@@ -3,7 +3,9 @@ class AnalyzeException(Exception):
 
 
 class LexicalAnalyzeException(AnalyzeException):
-    pass
+    def __init__(self, message, token=None):
+        super(LexicalAnalyzeException, self).__init__(message)
+        self.token = token
 
 
 class SyntaxAnalyzeException(AnalyzeException):
