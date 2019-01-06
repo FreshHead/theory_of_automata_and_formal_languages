@@ -23,3 +23,8 @@ def create_table(name, list_store):
 def insert_to_buffer(buffer, message):
     timestamp = datetime.now().strftime("%H:%M:%S.%f")
     buffer.insert(buffer.get_end_iter(), '[%s] %s\n' % (timestamp, message))
+
+
+def populate_list_store(list_store, dictionary):
+    for key in dictionary.keys():
+        list_store.append((str(hash(key)), dictionary[key]))

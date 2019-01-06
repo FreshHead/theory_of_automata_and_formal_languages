@@ -42,7 +42,7 @@ tree_table = Gtk.TreeView()
 start_button = Gtk.Button('Запуск!')
 
 start_button.connect('clicked', on_start_clicked, source_text_view.get_buffer(), message_text_view.get_buffer(),
-                     result_text_view.get_buffer())
+                     result_text_view.get_buffer(), digit_list_store, identifier_list_store, special_list_store)
 
 # placement
 v_box_left = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
