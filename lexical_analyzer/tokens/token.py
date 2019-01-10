@@ -5,7 +5,8 @@ from enum import Enum
 class TokenType(Enum):
     FIRST = "1"
     SECOND = "2"
-    UNKNOWN = "3"
+    SPECIAL = "3"
+    UNKNOWN = "4"
 
 
 class Token:

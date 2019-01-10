@@ -17,6 +17,7 @@ def create_table(name, list_store):
     v_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     v_box.add(label)
     v_box.add(tree_view)
+    v_box.set_size_request(200, 200)
     return v_box
 
 

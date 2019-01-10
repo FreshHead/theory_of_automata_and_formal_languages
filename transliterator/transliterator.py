@@ -20,6 +20,7 @@ class SymbolType(Enum):
     DIGIT = ('0', '1')
     LETTER = ('a', 'b', 'c', 'd')
     SPACE = ' '
+    SPECIAL = ('!', '=', '#', '(', ')', '-', '+')
     UNKNOWN = 'UNKNOWN'
 
 
